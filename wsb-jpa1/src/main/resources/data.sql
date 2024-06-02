@@ -6,7 +6,7 @@ insert into address (id, address_line1, address_line2, city, postal_code)
 insert into doctor (id, first_name, last_name, specialization, telephone_number, email, doctor_number)
             values (1, 'Jan', 'Kowalski', 'SURGEON', '1-123456789', 'doc1@example.com', '1'),
                    (2, 'Jan', 'Nowak', 'OCULIST', '2-123456789', 'doc2@example.com', '2'),
-                   (3, 'Jan', 'Kowalski', 'SURGEON', '3-123456789', 'doc3@example.com', '3'),
+                   (3, 'Jan', 'Czajkowski', 'SURGEON', '3-123456789', 'doc3@example.com', '3'),
                    (4, 'Jan', 'Beton', 'SURGEON', '14-123456789', 'doc4@example.com', '4'),
                    (5, 'Jan', 'Krzywy', 'OCULIST', '5-123456789', 'doc5@example.com', '5'),
                    (6, 'Jan', 'Wojak', 'SURGEON', '6-123456789', 'doc6@example.com', '6'),
@@ -21,7 +21,7 @@ insert into patient (id, first_name, last_name, telephone_number, email, date_of
             values (1, 'Zbigniew', 'Kowalski', '3-123456789', 'qYUeh2@example.com', '2021-01-01', '123456788'),
                    (2, 'Krzysio', 'Nowak', '4-123456789', 'Nowak3@example.com', '2021-01-01', '123456789'),
                    (3, 'Kajetan', 'Beton', '5-523456789', 'Beton4@example.com', '2021-01-01', '123456780'),
-                   (4, 'Benek', 'Bobo', '5-223456789', 'qYUeh2@example.com', '2021-01-01', '123456781');
+                   (4, 'Benek', 'Bobo', '5-223456789', 'qYUeh1@example.com', '2021-01-01', '123456781');
 
 insert into patient_to_address (patient_id, address_id)
             values (1, 1), (2, 2), (3, 2), (4, 1);

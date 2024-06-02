@@ -33,16 +33,19 @@ public class PatientDaoTest
     @Test
     @Transactional
     public void shouldRemoveVisitsWhenRemovingPatients() // TODO - naprawic relacje aby test przechodzil
-    {
-        // given
-        final Collection<VisitEntity> visits = patientDao.findOne(1L).getVisits();
+    { // given
+        final PatientEntity patient = patientDao.findOne(1L);
+        final Collection<VisitEntity> visits = new ArrayList<>(patient.getVisits());
 
         // when
+        patient.getVisits().clear();
+        patientDao.save(patient);
         patientDao.delete(1L);
 
         // then
         assertThat(visits.stream().filter(x -> visitsDao.exists(x.getId())).collect(Collectors.toList())).isEmpty();
     }
+
 
     @Test
     @Transactional
