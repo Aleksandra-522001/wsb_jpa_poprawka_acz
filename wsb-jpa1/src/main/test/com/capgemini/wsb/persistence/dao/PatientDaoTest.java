@@ -37,14 +37,14 @@ public class PatientDaoTest
         final PatientEntity patient = patientDao.findOne(1L);
         final Collection<VisitEntity> visits = new ArrayList<>(patient.getVisits());
 
+
         // when
-        patient.getVisits().clear();
-        patientDao.save(patient);
-        patientDao.delete(1L);
+        patientDao.delete(patient);
 
         // then
         assertThat(visits.stream().filter(x -> visitsDao.exists(x.getId())).collect(Collectors.toList())).isEmpty();
     }
+
 
 
     @Test
