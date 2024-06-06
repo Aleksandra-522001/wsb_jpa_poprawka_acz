@@ -17,6 +17,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -56,6 +57,7 @@ public class DoctorDaoTest
     }
 
     @Test
+    @Transactional
     public void shouldProveCorrectMappingDoctorToVisit() // TODO naprawic test bez zmiany danych testowych
     {
         // given
@@ -64,8 +66,11 @@ public class DoctorDaoTest
         final DoctorEntity doc = doctorDao.findOne(1L);
 
         // then
-        assertThat(doc.getVisits().size()).isEqualTo(2L);
-        assertThat(doc.getVisits().stream().map(x -> x.getPatient().getFirstName()+" "+x.getPatient().getLastName()).collect(Collectors.toList()))
-                .containsExactlyInAnyOrder("Krzysio Nowak", "Zbigniew Kowalski");
+        assertNotNull(doc);
+        assertThat(doc.getVisits().size()).isEqualTo(2);
+        List<String> patientNames = doc.getVisits().stream()
+                .map(visit -> visit.getPatient().getFirstName() + " " + visit.getPatient().getLastName())
+                .collect(Collectors.toList());
+        assertThat(patientNames).containsExactlyInAnyOrder("Krzysio Nowak", "Zbigniew Kowalski");
     }
 }

@@ -11,6 +11,11 @@ import java.util.List;
 
 @Repository
 public class DoctorDaoImpl extends AbstractDao<DoctorEntity, Long> implements DoctorDao {
+
+    @Override
+    public DoctorEntity findOne(Long id) {
+        return entityManager.find(DoctorEntity.class, id);
+    }
     @Override
     public List<DoctorEntity> findBySpecialization(Specialization specialization) { // TODO - napisac query
         return entityManager.createQuery(

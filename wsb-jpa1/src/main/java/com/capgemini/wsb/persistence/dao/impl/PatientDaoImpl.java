@@ -42,19 +42,21 @@ public class PatientDaoImpl extends AbstractDao<PatientEntity, Long> implements 
 
 
     @Override
-    public List<PatientEntity> findPatientsSharingSameLocationWithDoc(String firstName, String lastName) { // TODO - napisac query
+    public List<PatientEntity> findPatientsSharingSameLocationWithDoc(String firstName, String lastName) {
         TypedQuery<PatientEntity> query = entityManager.createQuery(
-                "SELECT p FROM PatientEntity p " +
-                        "WHERE p.addresses IN (" +
-                        "   SELECT d.addresses FROM DoctorEntity d " +
-                        "   WHERE d.firstName = :firstName AND d.lastName = :lastName)",
+                "SELECT DISTINCT p FROM PatientEntity p " +
+                        "JOIN p.addresses pa " +
+                        "JOIN pa.doctors d " +
+                        "WHERE d.firstName = :firstName AND d.lastName = :lastName",
                 PatientEntity.class);
         query.setParameter("firstName", firstName);
         query.setParameter("lastName", lastName);
         return query.getResultList();
-
-
     }
+
+
+
+
 
     @Override
     public List<PatientEntity> findPatientsWithoutLocation() { // TODO - napisac query
